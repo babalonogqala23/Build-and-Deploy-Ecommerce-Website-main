@@ -1519,6 +1519,24 @@ button.white {
   flex-direction: column;
   padding: 14px;
 }
+.banner-2 {
+  background-image: url(img/banner/b19.jpg);
+
+  width: 100%;
+  height: 40vh;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  padding: 14px;
+}
+.banner-2 h2 {
+  color: white;
+}
+.banner-2 p {
+  color: white;
+}
 #page-header h2,
 #page-header p {
   color: white;
@@ -1590,6 +1608,79 @@ button.white {
 }
 #prodetails .single-pro-details span {
   line-height: 25px;
+}
+
+.blog-section {
+  max-width: 900px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.blog-content {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 40px;
+}
+
+.blog-image {
+  flex: 0 0 300px;
+}
+
+.blog-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.blog-text {
+  flex: 1;
+}
+
+.blog-text h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.blog-text p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.8;
+}
+
+.blog-link {
+  display: inline-block;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.blog-link:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .blog-content {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .blog-image {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .blog-text h2 {
+    font-size: 24px;
+  }
 }
 /* ========================================
    HAMBURGER MENU STYLES
