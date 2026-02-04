@@ -134,6 +134,82 @@
         </span>
       </div>
     </section>
+
+    <section id="product1" class="section-p1">
+      <h2>featured products</h2>
+      <p>Summer collection new odern design</p>
+      <div class="pro-container">
+        <div class="pro">
+          <img src="img/products/f1.jpg" alt="" />
+          <!-- description -->
+          <div class="des">
+            <span>adidas</span>
+            <h5>cartoon astonaut t-shirts</h5>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <h4>R78</h4>
+          </div>
+          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+        </div>
+        <div class="pro">
+          <img src="img/products/f2.jpg" alt="" />
+          <!-- description -->
+          <div class="des">
+            <span>adidas</span>
+            <h5>cartoon astonaut t-shirts</h5>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i c9lass="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <h4>R78</h4>
+          </div>
+          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+        </div>
+        <div class="pro">
+          <img src="img/products/f3.jpg" alt="" />
+          <!-- description -->
+          <div class="des">
+            <span>adidas</span>
+            <h5>cartoon astonaut t-shirts</h5>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <h4>R78</h4>
+          </div>
+          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+        </div>
+        <div class="pro">
+          <img src="img/products/f4.jpg" alt="" />
+          <!-- description -->
+          <div class="des">
+            <span>adidas</span>
+            <h5>cartoon astonaut t-shirts</h5>
+            <div class="star">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <h4>R78</h4>
+          </div>
+          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+        </div>
+      </div>
+    </section>
+
     <section id="newsletter" class="section-p1 section-m1">
       <div class="newstext">
         <h4>Sign up for Newsletter</h4>
@@ -148,6 +224,7 @@
         <button class="normal">Sign Up</button>
       </div>
     </section>
+
     <!-- <footer class="section-p1">
       <div class="col">
         <img
@@ -346,6 +423,22 @@
           e.stopPropagation();
         });
       }
+
+      var mainImg = document.getElementById("mainimg");
+      var smallImg = document.getElementsByClassName("small-img");
+
+      smallImg[0].onclick = function () {
+        mainImg.src = smallImg[0].src;
+      };
+      smallImg[1].onclick = function () {
+        mainImg.src = smallImg[1].src;
+      };
+      smallImg[2].onclick = function () {
+        mainImg.src = smallImg[2].src;
+      };
+      smallImg[3].onclick = function () {
+        mainImg.src = smallImg[3].src;
+      };
     </script>
   </body>
 </html>

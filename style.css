@@ -1588,6 +1588,9 @@ button.white {
 #prodetails .single-pro-details input:focus {
   outline: none;
 }
+#prodetails .single-pro-details span {
+  line-height: 25px;
+}
 /* ========================================
    HAMBURGER MENU STYLES
    ======================================== */
