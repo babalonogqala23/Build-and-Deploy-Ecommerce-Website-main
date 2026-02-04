@@ -1,25 +1,351 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tech2etc Ecommerce Tutorial</title>
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tech2etc Ecommerce Tutorial</title>
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+  <body>
+    <header id="header">
+      <!-- Logo -->
+      <a href="index.html">
+        <img src="img/logo.png" class="logo" alt="Logo" />
+      </a>
 
-        <link rel="stylesheet" href="style.css">
-    </head>
+      <!-- HAMBURGER MENU BUTTON (Modern Animated Version) -->
+      <button
+        class="hamburger"
+        id="hamburger"
+        aria-label="Toggle navigation menu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-    <body>
+      <!-- NAVIGATION -->
+      <ul id="navbar">
+        <!-- Close button (shows inside mobile menu) -->
+        <li><a id="close" class="fas fa-times" aria-label="Close menu"></a></li>
 
+        <!-- Navigation Links -->
+        <li><a href="index.html">Home</a></li>
+        <li><a class="active" href="shop.html">Shop</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="lg-bag">
+          <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+        </li>
+      </ul>
 
-        <script>
-            // script for image change on click
-        </script>
+      <!-- OLD METHOD (Icon-based) - Alternative Option -->
+      <!-- Uncomment this if you prefer Font Awesome icons instead of hamburger -->
+      <!--
+    <div id="mobile">
+      <i id="bar" class="fas fa-outdent"></i>
+    </div>
+    --></header>
 
+    <!-- Overlay for mobile menu -->
+    <div class="nav-overlay" id="navOverlay"></div>
+    <!-- <section id="header">
+      <a href="#"><img src="img/logo.png" alt="" class="logo" /></a>
+      <div>
+        <ul id="navbar">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li>
+            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+          </li>
+        </ul>
+      </div>
+    </section> -->
 
-        <script src="script.js"></script>
-    </body>
+    <section id="prodetails" class="section-p1">
+      <div class="single-pro-image">
+        <img src="img/products/f1.jpg" id="mainimg" width="100%" />
+        <div class="small-img-group">
+          <div class="small-img-col">
+            <img
+              src="img/products/f1.jpg"
+              width="100%"
+              class="small-img"
+              alt=""
+            />
+          </div>
+          <div class="small-img-col">
+            <img
+              src="img/products/f2.jpg"
+              width="100%"
+              class="small-img"
+              alt=""
+            />
+          </div>
+          <div class="small-img-col">
+            <img
+              src="img/products/f3.jpg"
+              width="100%"
+              class="small-img"
+              alt=""
+            />
+          </div>
+          <div class="small-img-col">
+            <img
+              src="img/products/f4.jpg"
+              width="100%"
+              class="small-img"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+      <div class="single-pro-details">
+        <h6>home/t shirt</h6>
+        <h4>men fashion t shirt</h4>
+        <h2>$139.00</h2>
+        <select>
+          <option>select size</option>
+          <option>XL</option>
+          <option>XXL</option>
+          <option>small</option>
+          <option>large</option>
+        </select>
+        <input type="number" name="" value="1" id="" />
+        <button class="normal">add to cart</button>
+        <h4>product details</h4>
+        <span>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum ut
+          repudiandae dolore sunt eos sit nesciunt velit iste pariatur corporis
+          optio ullam ex aut adipisci quam, quaerat provident, saepe
+          voluptatibus aperiam reprehenderit, eaque incidunt ea vero asperiores?
+          Nisi, aliquid. Laboriosam eveniet velit atque cumque quod molestiae
+          ipsum quasi quas fugiat.
+        </span>
+      </div>
+    </section>
+    <section id="newsletter" class="section-p1 section-m1">
+      <div class="newstext">
+        <h4>Sign up for Newsletter</h4>
+        <p>
+          Get email updates about our latest shop and
+          <span>special offers.</span>
+        </p>
+      </div>
 
+      <div class="form">
+        <input type="email" placeholder="Your email address" />
+        <button class="normal">Sign Up</button>
+      </div>
+    </section>
+    <!-- <footer class="section-p1">
+      <div class="col">
+        <img
+          src="img/logo.png
+        "
+          alt=""
+        />
+        <h4>Contact</h4>
+        <p>
+          <strong>addres:</strong>sit amet consectetur adipisicing elit.
+          Veritatis doloremque
+        </p>
+        <p><strong>phone:</strong>0230234445454/ 792343243</p>
+        <p><strong>Hour:</strong>10:00 - 18:00 , mon-sat</p>
+        <div class="follow">
+          <h4>follow us</h4>
+          <div class="icon">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-youtube"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <h4>about</h4>
+        <a href="#">about us</a>
+        <a href="#">delivery information</a>
+        <a href="#">priivate policy</a>
+        <a href="#">terms & condition</a>
+        <a href="#">contact us</a>
+      </div>
+      <div class="col">
+        <h4>about</h4>
+        <a href="#">my account</a>
+        <a href="#">sign in</a>
+        <a href="#">view cart</a>
+        <a href="#">my wishtlist</a>
+        <a href="#">tracck my account</a>
+        <a href="#">help</a>
+      </div>
+      <div class="col install">
+        <h4>install app</h4>
+        <p>from app store or google play</p>
+        <div class="row">
+          <img src="img/pay/app.jpg" alt="" />
+
+          <img src="img/pay/play.jpg" alt="" />
+        </div>
+        <p>sercured payent gateway</p>
+
+        <img src="img/pay/pay.png" alt="" />
+      </div>
+      <div class="copyright">
+        <p>2021, copyrights</p>
+      </div>
+    </footer> -->
+    <footer class="footer section-p1">
+      <div class="footer-container">
+        <!-- Column 1 -->
+        <div class="col">
+          <img src="img/logo.png" alt="Logo" class="logo" />
+          <h4>Contact</h4>
+          <p>
+            <strong>Address:</strong> Sit amet consectetur adipisicing elit.
+          </p>
+          <p><strong>Phone:</strong> 023 023 4445 / 079 234 3243</p>
+          <p><strong>Hours:</strong> 10:00 – 18:00, Mon – Sat</p>
+
+          <div class="follow">
+            <h4>Follow Us</h4>
+            <div class="icon">
+              <i class="fab fa-facebook-f"></i>
+              <i class="fab fa-twitter"></i>
+              <i class="fab fa-instagram"></i>
+              <i class="fab fa-youtube"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="col">
+          <h4>About</h4>
+          <a href="#">About Us</a>
+          <a href="#">Delivery Information</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Contact Us</a>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="col">
+          <h4>My Account</h4>
+          <a href="#">Sign In</a>
+          <a href="#">View Cart</a>
+          <a href="#">My Wishlist</a>
+          <a href="#">Track My Order</a>
+          <a href="#">Help</a>
+        </div>
+
+        <!-- Column 4 -->
+        <div class="col install">
+          <h4>Install App</h4>
+          <p>From App Store or Google Play</p>
+          <div class="row">
+            <img src="img/pay/app.jpg" alt="App Store" />
+            <img src="img/pay/play.jpg" alt="Google Play" />
+          </div>
+          <p>Secured Payment Gateway</p>
+          <img src="img/pay/pay.png" alt="Payment Methods" />
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>© 2025. All rights reserved.</p>
+      </div>
+    </footer>
+    <!-- <script src="script.js"></script> -->
+    <script>
+      // Get elements
+      const hamburger = document.getElementById("hamburger");
+      const navbar = document.getElementById("navbar");
+      const navOverlay = document.getElementById("navOverlay");
+      const closeBtn = document.getElementById("close");
+      const body = document.body;
+
+      // Function to open menu
+      function openMenu() {
+        navbar.classList.add("active");
+        hamburger.classList.add("active");
+        navOverlay.classList.add("active");
+        body.style.overflow = "hidden";
+        console.log("Menu opened"); // For debugging
+      }
+
+      // Function to close menu
+      function closeMenu() {
+        navbar.classList.remove("active");
+        hamburger.classList.remove("active");
+        navOverlay.classList.remove("active");
+        body.style.overflow = "";
+        console.log("Menu closed"); // For debugging
+      }
+
+      // Toggle menu when hamburger is clicked
+      if (hamburger) {
+        hamburger.addEventListener("click", function (e) {
+          e.stopPropagation();
+          console.log("Hamburger clicked"); // For debugging
+
+          if (navbar.classList.contains("active")) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+      }
+
+      // Close menu when close button is clicked
+      if (closeBtn) {
+        closeBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          console.log("Close button clicked"); // For debugging
+          closeMenu();
+        });
+      }
+
+      // Close menu when overlay is clicked
+      if (navOverlay) {
+        navOverlay.addEventListener("click", function () {
+          console.log("Overlay clicked"); // For debugging
+          closeMenu();
+        });
+      }
+
+      // Close menu when clicking a navigation link
+      const navLinks = document.querySelectorAll("#navbar li a:not(#close)");
+      navLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+          console.log("Nav link clicked"); // For debugging
+          closeMenu();
+        });
+      });
+
+      // Close menu on escape key
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && navbar.classList.contains("active")) {
+          console.log("Escape pressed"); // For debugging
+          closeMenu();
+        }
+      });
+
+      // Prevent clicks inside navbar from closing it
+      if (navbar) {
+        navbar.addEventListener("click", function (e) {
+          e.stopPropagation();
+        });
+      }
+    </script>
+  </body>
 </html>
