@@ -4,39 +4,348 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tech2etc Ecommerce Tutorial</title>
+    <title>Cara Ecommerce</title>
     <link
       rel="stylesheet"
       href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     />
-
     <link rel="stylesheet" href="style.css" />
+    <style>
+      /* ── Badge ── */
+      #lg-bag {
+        position: relative;
+      }
+      #cart-badge {
+        position: absolute;
+        top: -8px;
+        right: -10px;
+        background: #e8434b;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      /* ── Toast ── */
+      #cart-toast {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(80px);
+        background: #1a1a2e;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 500;
+        z-index: 9999;
+        opacity: 0;
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
+        white-space: nowrap;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+      #cart-toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* ── Cart table ── */
+      #cart table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      #cart table thead td {
+        background: #f8f8f8;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        padding: 14px 10px;
+        border-bottom: 2px solid #e0e0e0;
+        letter-spacing: 0.5px;
+      }
+      #cart table tbody td {
+        padding: 16px 10px;
+        border-bottom: 1px solid #f0f0f0;
+        vertical-align: middle;
+        font-size: 14px;
+      }
+      #cart table tbody tr:hover {
+        background: #fafafa;
+      }
+
+      #cart table tbody td img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 8px;
+        display: block;
+      }
+
+      #cart table tbody td input[type="number"] {
+        width: 60px;
+        padding: 6px 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .remove-btn {
+        color: #ccc;
+        font-size: 18px;
+        transition: color 0.2s;
+        cursor: pointer;
+      }
+      .remove-btn:hover {
+        color: #e8434b;
+      }
+
+      /* ── Empty cart message ── */
+      #empty-cart-msg {
+        text-align: center;
+        padding: 60px 20px;
+        color: #888;
+        display: none;
+      }
+      #empty-cart-msg i {
+        font-size: 48px;
+        margin-bottom: 16px;
+        display: block;
+      }
+      #empty-cart-msg h3 {
+        font-size: 22px;
+        margin-bottom: 8px;
+        color: #333;
+      }
+      #empty-cart-msg a {
+        color: #e8434b;
+        text-decoration: underline;
+      }
+
+      /* ── Cart totals box ── */
+      #cart-add {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 30px;
+        padding: 40px 80px;
+      }
+
+      /* Coupon section */
+      .subtotal-box h3,
+      .coupon h3 {
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #222;
+      }
+
+      .coupon {
+        flex: 1;
+        min-width: 260px;
+      }
+      .coupon p {
+        font-size: 13px;
+        color: #777;
+        margin-bottom: 14px;
+        line-height: 1.5;
+      }
+      .coupon input {
+        border: 1px solid #ddd;
+        padding: 10px 14px;
+        border-radius: 6px 0 0 6px;
+        font-size: 14px;
+        width: 200px;
+        outline: none;
+      }
+      .coupon button {
+        background: #088178;
+        color: #fff;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 0 6px 6px 0;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .coupon button:hover {
+        background: #066b64;
+      }
+
+      /* Subtotal / totals */
+      .subtotal-box {
+        flex: 1;
+        min-width: 280px;
+        background: #f8f8f8;
+        border-radius: 12px;
+        padding: 28px 32px;
+      }
+      .subtotal-box table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .subtotal-box table td {
+        padding: 10px 0;
+        font-size: 14px;
+        border-bottom: 1px solid #eee;
+      }
+      .subtotal-box table td:last-child {
+        text-align: right;
+        font-weight: 600;
+      }
+      .subtotal-box table tr.total-row td {
+        font-size: 16px;
+        font-weight: 700;
+        border-bottom: none;
+        color: #088178;
+        padding-top: 14px;
+      }
+      .subtotal-box button.normal {
+        width: 100%;
+        margin-top: 20px;
+        padding: 14px;
+        font-size: 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #088178;
+        color: #fff;
+        border: none;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+      .subtotal-box button.normal:hover {
+        background: #066b64;
+        transform: translateY(-1px);
+      }
+      .subtotal-box button.normal:disabled {
+        background: #bbb;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* Discount applied label */
+      #discount-row {
+        display: none;
+      }
+      #discount-row td {
+        color: #27ae60;
+      }
+
+      /* ── Success Modal ── */
+      #success-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+      }
+      #success-modal.show {
+        display: flex;
+      }
+      .modal-box {
+        background: #fff;
+        border-radius: 20px;
+        padding: 50px 40px;
+        text-align: center;
+        max-width: 420px;
+        width: 90%;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        animation: modalPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      @keyframes modalPop {
+        from {
+          transform: scale(0.7);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .modal-icon {
+        width: 80px;
+        height: 80px;
+        background: #e8f9f1;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+      }
+      .modal-icon i {
+        font-size: 38px;
+        color: #27ae60;
+      }
+      .modal-box h2 {
+        font-size: 26px;
+        color: #222;
+        margin-bottom: 10px;
+      }
+      .modal-box p {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 28px;
+        line-height: 1.6;
+      }
+      .modal-box button {
+        background: #088178;
+        color: #fff;
+        border: none;
+        padding: 12px 32px;
+        border-radius: 30px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .modal-box button:hover {
+        background: #066b64;
+      }
+
+      @media (max-width: 768px) {
+        #cart-add {
+          padding: 30px 20px;
+        }
+        .subtotal-box {
+          min-width: 100%;
+        }
+        .coupon {
+          min-width: 100%;
+        }
+      }
+    </style>
   </head>
 
   <body>
     <header id="header">
-      <!-- Logo -->
-      <a href="index.html">
-        <img src="img/logo.png" class="logo" alt="Logo" />
-      </a>
+      <a href="index.html"
+        ><img src="img/logo.png" class="logo" alt="Logo"
+      /></a>
 
-      <!-- HAMBURGER MENU BUTTON (Modern Animated Version) -->
       <button
         class="hamburger"
         id="hamburger"
         aria-label="Toggle navigation menu"
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
 
-      <!-- NAVIGATION -->
       <ul id="navbar">
-        <!-- Close button (shows inside mobile menu) -->
         <li><a id="close" class="fas fa-times" aria-label="Close menu"></a></li>
-
-        <!-- Navigation Links -->
         <li><a href="index.html">Home</a></li>
         <li><a href="shop.html">Shop</a></li>
         <li><a href="blog.html">Blog</a></li>
@@ -46,101 +355,102 @@
           <a href="cart.html" class="active"
             ><i class="far fa-shopping-bag"></i
           ></a>
+          <span id="cart-badge">0</span>
         </li>
       </ul>
+    </header>
 
-      <!-- OLD METHOD (Icon-based) - Alternative Option -->
-      <!-- Uncomment this if you prefer Font Awesome icons instead of hamburger -->
-      <!--
-    <div id="mobile">
-      <i id="bar" class="fas fa-outdent"></i>
-    </div>
-    --></header>
-
-    <!-- Overlay for mobile menu -->
     <div class="nav-overlay" id="navOverlay"></div>
-    <!-- <section id="header">
-      <a href="#"><img src="img/logo.png" alt="" class="logo" /></a>
-      <div>
-        <ul id="navbar">
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li>
-            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
-          </li>
-        </ul>
-      </div>
-    </section> -->
 
     <section class="banner-3">
       <h2>#Cart</h2>
-
-      <p>Add your coupon code & save upto 70%</p>
+      <p>Add your coupon code &amp; save up to 70%</p>
     </section>
 
-    <!-- <footer class="section-p1">
-      <div class="col">
-        <img
-          src="img/logo.png
-        "
-          alt=""
-        />
-        <h4>Contact</h4>
+    <!-- ── Cart Table ── -->
+    <section id="cart" class="section-p1">
+      <table width="100%" id="cart-table">
+        <thead>
+          <tr>
+            <td>Remove</td>
+            <td>Image</td>
+            <td>Product</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Subtotal</td>
+          </tr>
+        </thead>
+        <tbody id="cart-body">
+          <!-- Rows injected by JS -->
+        </tbody>
+      </table>
+
+      <!-- Empty state -->
+      <div id="empty-cart-msg">
+        <i class="far fa-shopping-cart"></i>
+        <h3>Your cart is empty</h3>
         <p>
-          <strong>addres:</strong>sit amet consectetur adipisicing elit.
-          Veritatis doloremque
+          Looks like you haven't added anything yet.<br />
+          <a href="shop.html">Browse the shop →</a>
         </p>
-        <p><strong>phone:</strong>0230234445454/ 792343243</p>
-        <p><strong>Hour:</strong>10:00 - 18:00 , mon-sat</p>
-        <div class="follow">
-          <h4>follow us</h4>
-          <div class="icon">
-            <i class="fab fa-facebook-f"></i>
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-youtube"></i>
-          </div>
-        </div>
       </div>
-      <div class="col">
-        <h4>about</h4>
-        <a href="#">about us</a>
-        <a href="#">delivery information</a>
-        <a href="#">priivate policy</a>
-        <a href="#">terms & condition</a>
-        <a href="#">contact us</a>
-      </div>
-      <div class="col">
-        <h4>about</h4>
-        <a href="#">my account</a>
-        <a href="#">sign in</a>
-        <a href="#">view cart</a>
-        <a href="#">my wishtlist</a>
-        <a href="#">tracck my account</a>
-        <a href="#">help</a>
-      </div>
-      <div class="col install">
-        <h4>install app</h4>
-        <p>from app store or google play</p>
-        <div class="row">
-          <img src="img/pay/app.jpg" alt="" />
+    </section>
 
-          <img src="img/pay/play.jpg" alt="" />
+    <!-- ── Coupon + Totals ── -->
+    <section id="cart-add">
+      <div class="coupon">
+        <h3>Apply Coupon</h3>
+        <p>
+          Enter a valid coupon code below. Try <strong>SAVE10</strong> for 10%
+          off.
+        </p>
+        <div>
+          <input type="text" id="coupon-input" placeholder="Coupon code" />
+          <button id="apply-coupon-btn">Apply</button>
         </div>
-        <p>sercured payent gateway</p>
+        <p id="coupon-msg" style="margin-top: 10px; font-size: 13px"></p>
+      </div>
 
-        <img src="img/pay/pay.png" alt="" />
+      <div class="subtotal-box">
+        <h3>Cart Totals</h3>
+        <table>
+          <tr>
+            <td>Subtotal</td>
+            <td>R <span id="subtotal-val">0.00</span></td>
+          </tr>
+          <tr id="discount-row">
+            <td>Discount (10%)</td>
+            <td>− R <span id="discount-val">0.00</span></td>
+          </tr>
+          <tr>
+            <td>Shipping</td>
+            <td>Free</td>
+          </tr>
+          <tr class="total-row">
+            <td>Total</td>
+            <td>R <span id="total-val">0.00</span></td>
+          </tr>
+        </table>
+        <button class="normal" id="pay-btn">Proceed to Pay</button>
       </div>
-      <div class="copyright">
-        <p>2021, copyrights</p>
+    </section>
+
+    <section id="newsletter" class="section-p1 section-m1">
+      <div class="newstext">
+        <h4>Sign up for Newsletter</h4>
+        <p>
+          Get email updates about our latest shop and
+          <span>special offers.</span>
+        </p>
       </div>
-    </footer> -->
+      <div class="form">
+        <input type="email" placeholder="Your email address" />
+        <button class="normal">Sign Up</button>
+      </div>
+    </section>
+
     <footer class="footer section-p1">
       <div class="footer-container">
-        <!-- Column 1 -->
         <div class="col">
           <img src="img/logo.png" alt="Logo" class="logo" />
           <h4>Contact</h4>
@@ -149,39 +459,26 @@
           </p>
           <p><strong>Phone:</strong> 023 023 4445 / 079 234 3243</p>
           <p><strong>Hours:</strong> 10:00 – 18:00, Mon – Sat</p>
-
           <div class="follow">
             <h4>Follow Us</h4>
             <div class="icon">
-              <i class="fab fa-facebook-f"></i>
-              <i class="fab fa-twitter"></i>
-              <i class="fab fa-instagram"></i>
-              <i class="fab fa-youtube"></i>
+              <i class="fab fa-facebook-f"></i><i class="fab fa-twitter"></i>
+              <i class="fab fa-instagram"></i><i class="fab fa-youtube"></i>
             </div>
           </div>
         </div>
-
-        <!-- Column 2 -->
         <div class="col">
           <h4>About</h4>
-          <a href="#">About Us</a>
-          <a href="#">Delivery Information</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms & Conditions</a>
-          <a href="#">Contact Us</a>
+          <a href="#">About Us</a><a href="#">Delivery Information</a>
+          <a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a
+          ><a href="#">Contact Us</a>
         </div>
-
-        <!-- Column 3 -->
         <div class="col">
           <h4>My Account</h4>
-          <a href="#">Sign In</a>
-          <a href="#">View Cart</a>
-          <a href="#">My Wishlist</a>
-          <a href="#">Track My Order</a>
-          <a href="#">Help</a>
+          <a href="#">Sign In</a><a href="cart.html">View Cart</a>
+          <a href="#">My Wishlist</a><a href="#">Track My Order</a
+          ><a href="#">Help</a>
         </div>
-
-        <!-- Column 4 -->
         <div class="col install">
           <h4>Install App</h4>
           <p>From App Store or Google Play</p>
@@ -193,92 +490,208 @@
           <img src="img/pay/pay.png" alt="Payment Methods" />
         </div>
       </div>
-
-      <div class="copyright">
-        <p>© 2025. All rights reserved.</p>
-      </div>
+      <div class="copyright"><p>&copy; 2025. All rights reserved.</p></div>
     </footer>
-    <!-- <script src="script.js"></script> -->
+
+    <!-- ── Payment Success Modal ── -->
+    <div id="success-modal">
+      <div class="modal-box">
+        <div class="modal-icon">
+          <i class="fas fa-check"></i>
+        </div>
+        <h2>Payment Successful!</h2>
+        <p>
+          Thank you for your purchase. Your order has been placed and will be
+          delivered soon.
+        </p>
+        <button id="modal-close-btn">Continue Shopping</button>
+      </div>
+    </div>
+
+    <script src="cart.js"></script>
     <script>
-      // Get elements
+      // ── Hamburger ──
       const hamburger = document.getElementById("hamburger");
       const navbar = document.getElementById("navbar");
       const navOverlay = document.getElementById("navOverlay");
       const closeBtn = document.getElementById("close");
-      const body = document.body;
 
-      // Function to open menu
       function openMenu() {
         navbar.classList.add("active");
         hamburger.classList.add("active");
         navOverlay.classList.add("active");
-        body.style.overflow = "hidden";
-        console.log("Menu opened"); // For debugging
+        document.body.style.overflow = "hidden";
       }
-
-      // Function to close menu
       function closeMenu() {
         navbar.classList.remove("active");
         hamburger.classList.remove("active");
         navOverlay.classList.remove("active");
-        body.style.overflow = "";
-        console.log("Menu closed"); // For debugging
+        document.body.style.overflow = "";
       }
 
-      // Toggle menu when hamburger is clicked
-      if (hamburger) {
-        hamburger.addEventListener("click", function (e) {
-          e.stopPropagation();
-          console.log("Hamburger clicked"); // For debugging
+      hamburger?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        navbar.classList.contains("active") ? closeMenu() : openMenu();
+      });
+      closeBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeMenu();
+      });
+      navOverlay?.addEventListener("click", closeMenu);
+      document
+        .querySelectorAll("#navbar li a:not(#close)")
+        .forEach((l) => l.addEventListener("click", closeMenu));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !successModal.classList.contains("show"))
+          closeMenu();
+      });
+      navbar?.addEventListener("click", (e) => e.stopPropagation());
 
-          if (navbar.classList.contains("active")) {
-            closeMenu();
+      // ── Cart rendering ──
+      let discountApplied = false;
+
+      function renderCart() {
+        const items = Cart.getItems();
+        const tbody = document.getElementById("cart-body");
+        const emptyMsg = document.getElementById("empty-cart-msg");
+        const payBtn = document.getElementById("pay-btn");
+
+        tbody.innerHTML = "";
+
+        if (items.length === 0) {
+          document.getElementById("cart-table").style.display = "none";
+          emptyMsg.style.display = "block";
+          payBtn.disabled = true;
+          updateTotals(items);
+          return;
+        }
+
+        document.getElementById("cart-table").style.display = "table";
+        emptyMsg.style.display = "none";
+        payBtn.disabled = false;
+
+        items.forEach((item) => {
+          const sub = (item.price * item.qty).toFixed(2);
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>
+              <a href="#" class="remove-btn" data-id="${item.id}" title="Remove item">
+                <i class="far fa-times-circle"></i>
+              </a>
+            </td>
+            <td><img src="${item.img}" alt="${item.name}" /></td>
+            <td>${item.name}</td>
+            <td>R ${parseFloat(item.price).toFixed(2)}</td>
+            <td>
+              <input type="number" value="${item.qty}" min="1" class="qty-input" data-id="${item.id}" />
+            </td>
+            <td>R ${sub}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        // Remove buttons
+        tbody.querySelectorAll(".remove-btn").forEach((btn) => {
+          btn.addEventListener("click", function (e) {
+            e.preventDefault();
+            Cart.removeItem(this.dataset.id);
+            renderCart();
+          });
+        });
+
+        // Quantity inputs
+        tbody.querySelectorAll(".qty-input").forEach((input) => {
+          input.addEventListener("change", function () {
+            Cart.updateQty(this.dataset.id, this.value);
+            renderCart();
+          });
+        });
+
+        updateTotals(items);
+      }
+
+      function updateTotals(items) {
+        const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
+        const discountAmt = discountApplied ? subtotal * 0.1 : 0;
+        const total = subtotal - discountAmt;
+
+        document.getElementById("subtotal-val").textContent =
+          subtotal.toFixed(2);
+        document.getElementById("total-val").textContent = total.toFixed(2);
+
+        const discRow = document.getElementById("discount-row");
+        if (discountApplied && subtotal > 0) {
+          discRow.style.display = "table-row";
+          document.getElementById("discount-val").textContent =
+            discountAmt.toFixed(2);
+        } else {
+          discRow.style.display = "none";
+        }
+      }
+
+      // ── Coupon ──
+      document
+        .getElementById("apply-coupon-btn")
+        .addEventListener("click", function () {
+          const code = document
+            .getElementById("coupon-input")
+            .value.trim()
+            .toUpperCase();
+          const msgEl = document.getElementById("coupon-msg");
+          const VALID = ["SAVE10", "TECH10", "DISCOUNT10"];
+
+          if (VALID.includes(code)) {
+            discountApplied = true;
+            msgEl.style.color = "#27ae60";
+            msgEl.textContent = "✔ Coupon applied! You get 10% off.";
+            renderCart();
+          } else if (code === "") {
+            msgEl.style.color = "#e8434b";
+            msgEl.textContent = "Please enter a coupon code.";
           } else {
-            openMenu();
+            discountApplied = false;
+            msgEl.style.color = "#e8434b";
+            msgEl.textContent = "✘ Invalid coupon code. Try SAVE10.";
+            renderCart();
           }
         });
-      }
 
-      // Close menu when close button is clicked
-      if (closeBtn) {
-        closeBtn.addEventListener("click", function (e) {
-          e.preventDefault();
-          console.log("Close button clicked"); // For debugging
-          closeMenu();
-        });
-      }
+      // ── Payment & Success Modal ──
+      const successModal = document.getElementById("success-modal");
+      const modalCloseBtn = document.getElementById("modal-close-btn");
 
-      // Close menu when overlay is clicked
-      if (navOverlay) {
-        navOverlay.addEventListener("click", function () {
-          console.log("Overlay clicked"); // For debugging
-          closeMenu();
-        });
-      }
+      document.getElementById("pay-btn").addEventListener("click", function () {
+        const items = Cart.getItems();
+        if (items.length === 0) return;
 
-      // Close menu when clicking a navigation link
-      const navLinks = document.querySelectorAll("#navbar li a:not(#close)");
-      navLinks.forEach(function (link) {
-        link.addEventListener("click", function () {
-          console.log("Nav link clicked"); // For debugging
-          closeMenu();
-        });
+        // Show success modal
+        successModal.classList.add("show");
+        document.body.style.overflow = "hidden";
+
+        // Clear cart
+        Cart.clearCart();
+        discountApplied = false;
+        document.getElementById("coupon-input").value = "";
+        document.getElementById("coupon-msg").textContent = "";
       });
 
-      // Close menu on escape key
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && navbar.classList.contains("active")) {
-          console.log("Escape pressed"); // For debugging
-          closeMenu();
+      modalCloseBtn.addEventListener("click", function () {
+        successModal.classList.remove("show");
+        document.body.style.overflow = "";
+        renderCart(); // re-render empty cart
+      });
+
+      // Close modal on background click
+      successModal.addEventListener("click", function (e) {
+        if (e.target === successModal) {
+          successModal.classList.remove("show");
+          document.body.style.overflow = "";
+          renderCart();
         }
       });
 
-      // Prevent clicks inside navbar from closing it
-      if (navbar) {
-        navbar.addEventListener("click", function (e) {
-          e.stopPropagation();
-        });
-      }
+      // ── Init ──
+      renderCart();
     </script>
   </body>
 </html>

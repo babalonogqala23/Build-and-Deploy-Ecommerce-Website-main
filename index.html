@@ -4,39 +4,92 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tech2etc Ecommerce</title>
+    <title>Cara Ecommerce</title>
     <link
       rel="stylesheet"
       href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
     />
-
     <link rel="stylesheet" href="style.css" />
+    <style>
+      /* ── Cart Badge ── */
+      #lg-bag {
+        position: relative;
+      }
+      #cart-badge {
+        position: absolute;
+        top: -8px;
+        right: -10px;
+        background: #e8434b;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        z-index: 10;
+      }
+
+      /* ── Add to cart button flash ── */
+      .pro .cart {
+        transition:
+          color 0.2s,
+          transform 0.2s;
+      }
+      .pro .cart:hover {
+        color: #e8434b;
+        transform: scale(1.2);
+      }
+      .pro .cart.added {
+        color: #27ae60 !important;
+      }
+
+      /* ── Toast notification ── */
+      #cart-toast {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(80px);
+        background: #1a1a2e;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 500;
+        z-index: 9999;
+        opacity: 0;
+        transition:
+          opacity 0.3s ease,
+          transform 0.3s ease;
+        white-space: nowrap;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+      #cart-toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    </style>
   </head>
 
   <body>
     <header id="header">
-      <!-- Logo -->
       <a href="index.html">
         <img src="img/logo.png" class="logo" alt="Logo" />
       </a>
 
-      <!-- HAMBURGER MENU BUTTON (Modern Animated Version) -->
       <button
         class="hamburger"
         id="hamburger"
         aria-label="Toggle navigation menu"
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
 
-      <!-- NAVIGATION -->
       <ul id="navbar">
-        <!-- Close button (shows inside mobile menu) -->
         <li><a id="close" class="fas fa-times" aria-label="Close menu"></a></li>
-
-        <!-- Navigation Links -->
         <li><a class="active" href="index.html">Home</a></li>
         <li><a href="shop.html">Shop</a></li>
         <li><a href="blog.html">Blog</a></li>
@@ -44,41 +97,19 @@
         <li><a href="contact.html">Contact</a></li>
         <li id="lg-bag">
           <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+          <span id="cart-badge">0</span>
         </li>
       </ul>
+    </header>
 
-      <!-- OLD METHOD (Icon-based) - Alternative Option -->
-      <!-- Uncomment this if you prefer Font Awesome icons instead of hamburger -->
-      <!--
-    <div id="mobile">
-      <i id="bar" class="fas fa-outdent"></i>
-    </div>
-    --></header>
-
-    <!-- Overlay for mobile menu -->
     <div class="nav-overlay" id="navOverlay"></div>
-    <!-- <section id="header">
-      <a href="#"><img src="img/logo.png" alt="" class="logo" /></a>
-      <div>
-        <ul id="navbar">
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li>
-            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
-          </li>
-        </ul>
-      </div>
-    </section> -->
 
     <section id="hero">
       <h4>Trade-in-offer</h4>
       <h2>Super value deals</h2>
       <h1>On all products</h1>
-      <p>Save more with coupons & up to 70% off</p>
-      <button>shop Now</button>
+      <p>Save more with coupons &amp; up to 70% off</p>
+      <button>Shop Now</button>
     </section>
 
     <section id="feature" class="section-p1">
@@ -100,9 +131,8 @@
       </div>
       <div class="fe-box">
         <img src="img/features/f5.png" alt="" />
-        <h6>happy sell</h6>
+        <h6>Happy Sell</h6>
       </div>
-
       <div class="fe-box">
         <img src="img/features/f6.png" alt="" />
         <h6>24/7 Support</h6>
@@ -111,321 +141,420 @@
 
     <section id="product1" class="section-p1">
       <h2>Feature Products</h2>
-      <p>Summer Collection New Horden Design</p>
+      <p>Summer Collection New Modern Design</p>
       <div class="pro-container">
         <div class="pro">
           <img src="img/products/f1.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Reyn Spooner</span>
+            <h5>Surf Break Performance Aloha Shirt</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
-            <h4>R78</h4>
+            <h4>R128</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="f1"
+            data-name="Cartoon Astronaut T-Shirt (Red)"
+            data-price="78"
+            data-img="img/products/f1.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/f2.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Paradise Found</span>
+            <h5>Jungle Bird Hawaiian Shirt</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i c9lass="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
-            <h4>R78</h4>
+            <h4>R65</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="f2"
+            data-name="Cartoon Astronaut T-Shirt (Blue)"
+            data-price="78"
+            data-img="img/products/f2.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/f3.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Kāhala</span>
+            <h5>King's Shells Anniversary Aloha Shirt</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
-            <h4>R78</h4>
+            <h4>R95</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="f3"
+            data-name="Cartoon Astronaut T-Shirt (Green)"
+            data-price="78"
+            data-img="img/products/f3.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/f4.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Tori Richard</span>
+            <h5>Palmae Family Classic Shirt</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
-            <h4>R78</h4>
+            <h4>R120</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="f4"
+            data-name="Cartoon Astronaut T-Shirt (Yellow)"
+            data-price="78"
+            data-img="img/products/f4.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/f5.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Pacific Legend</span>
+            <h5>Hibiscus Monstera Cotton Shirt</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
-            <h4>R78</h4>
+            <h4>R45</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="f5"
+            data-name="Cartoon Astronaut T-Shirt (White)"
+            data-price="78"
+            data-img="img/products/f5.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/f6.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Reyn Spooner</span>
+            <h5>Ginger Burst Piper Top</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
-            <h4>R78</h4>
+            <h4>R128</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="f6"
+            data-name="Cartoon Astronaut T-Shirt (Black)"
+            data-price="78"
+            data-img="img/products/f6.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/f7.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Tommy Bahama</span>
+            <h5>Beach Coast Stretch-Linen E-Waist</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
-            <h4>R78</h4>
+            <h4>R128</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="f7"
+            data-name="Cartoon Astronaut T-Shirt (Purple)"
+            data-price="78"
+            data-img="img/products/f7.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/f8.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Baracuta</span>
+            <h5>Harrington Linen Summer</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
-            <h4>R78</h4>
+            <h4>R350</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="f8"
+            data-name="Cartoon Astronaut T-Shirt (Orange)"
+            data-price="78"
+            data-img="img/products/f8.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
       </div>
     </section>
+
     <section id="banner" class="section-p1">
-      <h4>repair service</h4>
-      <h2>Up to <span> 70% off</span>- all t-shirts & accessories</h2>
-      <button class="normal">explore & more</button>
+      <h4>Repair Service</h4>
+      <h2>Up to <span>70% off</span> - all t-shirts &amp; accessories</h2>
+      <button class="normal">Explore &amp; More</button>
     </section>
+
     <section id="product1" class="section-p1">
       <h2>New Arrivals</h2>
-      <p>Summer Collection New Horden Design</p>
+      <p>Summer Collection New Modern Design</p>
       <div class="pro-container">
         <div class="pro">
           <img src="img/products/n2.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Reyn Spooner</span>
+            <h5>Sunset Cove Linen Shirt</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
-            <h4>R78</h4>
+            <h4>R95</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="n2"
+            data-name="Astronaut New Arrival (V2)"
+            data-price="78"
+            data-img="img/products/n2.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/n3.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Ralph Lauren</span>
+            <h5>Coastal Breeze Polo</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i c9lass="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
-            <h4>R78</h4>
+            <h4>R89</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="n3"
+            data-name="Astronaut New Arrival (V3)"
+            data-price="78"
+            data-img="img/products/n3.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/n1.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Quiksilver</span>
+            <h5>Island Time Cotton Tee</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
-            <h4>R78</h4>
+            <h4>R35</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="n1"
+            data-name="Astronaut New Arrival (V1)"
+            data-price="78"
+            data-img="img/products/n1.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/n4.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Billabong</span>
+            <h5>Malibu Waves Henley</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
-            <h4>R78</h4>
+            <h4>R45</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="n4"
+            data-name="Astronaut New Arrival (V4)"
+            data-price="78"
+            data-img="img/products/n4.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/n5.jpg" alt="" />
-          <!-- description -->
           <div class="des">
             <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <h5>Astronaut New Arrival</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
             <h4>R78</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="n5"
+            data-name="Astronaut New Arrival (V5)"
+            data-price="78"
+            data-img="img/products/n5.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/n6.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Tommy Bahama</span>
+            <h5>Baja Stretch Chino Shorts</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
-            <h4>R78</h4>
+            <h4>R89</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="n6"
+            data-name="Astronaut New Arrival (V6)"
+            data-price="78"
+            data-img="img/products/n6.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/n7.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Free People</span>
+            <h5>Tropicana Floral</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
             <h4>R78</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="n7"
+            data-name="Astronaut New Arrival (V7)"
+            data-price="78"
+            data-img="img/products/n7.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
+
         <div class="pro">
           <img src="img/products/n8.jpg" alt="" />
-          <!-- description -->
           <div class="des">
-            <span>adidas</span>
-            <h5>cartoon astonaut t-shirts</h5>
+            <span>Tommy Bahama</span>
+            <h5>Pacific Palms Relaxed Shirt</h5>
             <div class="star">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
             </div>
             <h4>R78</h4>
           </div>
-          <a href="#"><i class="fal fa-shopping-cart cart"></i></a>
+          <a
+            href="#"
+            class="cart-add-btn"
+            data-id="n8"
+            data-name="Astronaut New Arrival (V8)"
+            data-price="78"
+            data-img="img/products/n8.jpg"
+            ><i class="fal fa-shopping-cart cart"></i
+          ></a>
         </div>
       </div>
     </section>
+
     <section id="sm-banner" class="section-p1">
       <div class="banner-box">
         <h4>crazy deal</h4>
         <h2>buy 1 get 1 free</h2>
-        <span>the best clasic dress is on sale at carac</span>
+        <span>The best classic dress is on sale at carac</span>
         <button class="white">learn more</button>
       </div>
       <div class="banner-box banner-box2">
         <h4>spring/summer</h4>
-        <h2>upcomming season</h2>
-        <span>the best clasic dress is on sale at carac</span>
+        <h2>upcoming season</h2>
+        <span>The best classic dress is on sale at carac</span>
         <button class="white">collection</button>
       </div>
     </section>
+
     <section id="banner3">
       <div class="banner-box">
         <h2>seasonal sale</h2>
         <h3>Winter collection -50% off</h3>
       </div>
       <div class="banner-box banner-box2">
-        <h2>NEEW FOOTWEAR Collection</h2>
+        <h2>NEW FOOTWEAR Collection</h2>
         <h3>Spring/Summer 22</h3>
       </div>
       <div class="banner-box banner-box3">
-        <h2>T-SHRTS</h2>
+        <h2>T-SHIRTS</h2>
         <h3>New trend prints</h3>
       </div>
     </section>
+
     <section id="newsletter" class="section-p1 section-m1">
       <div class="newstext">
         <h4>Sign up for Newsletter</h4>
@@ -434,72 +563,14 @@
           <span>special offers.</span>
         </p>
       </div>
-
       <div class="form">
         <input type="email" placeholder="Your email address" />
         <button class="normal">Sign Up</button>
       </div>
     </section>
-    <!-- <footer class="section-p1">
-      <div class="col">
-        <img
-          src="img/logo.png
-        "
-          alt=""
-        />
-        <h4>Contact</h4>
-        <p>
-          <strong>addres:</strong>sit amet consectetur adipisicing elit.
-          Veritatis doloremque
-        </p>
-        <p><strong>phone:</strong>0230234445454/ 792343243</p>
-        <p><strong>Hour:</strong>10:00 - 18:00 , mon-sat</p>
-        <div class="follow">
-          <h4>follow us</h4>
-          <div class="icon">
-            <i class="fab fa-facebook-f"></i>
-            <i class="fab fa-twitter"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-youtube"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <h4>about</h4>
-        <a href="#">about us</a>
-        <a href="#">delivery information</a>
-        <a href="#">priivate policy</a>
-        <a href="#">terms & condition</a>
-        <a href="#">contact us</a>
-      </div>
-      <div class="col">
-        <h4>about</h4>
-        <a href="#">my account</a>
-        <a href="#">sign in</a>
-        <a href="#">view cart</a>
-        <a href="#">my wishtlist</a>
-        <a href="#">tracck my account</a>
-        <a href="#">help</a>
-      </div>
-      <div class="col install">
-        <h4>install app</h4>
-        <p>from app store or google play</p>
-        <div class="row">
-          <img src="img/pay/app.jpg" alt="" />
 
-          <img src="img/pay/play.jpg" alt="" />
-        </div>
-        <p>sercured payent gateway</p>
-
-        <img src="img/pay/pay.png" alt="" />
-      </div>
-      <div class="copyright">
-        <p>2021, copyrights</p>
-      </div>
-    </footer> -->
     <footer class="footer section-p1">
       <div class="footer-container">
-        <!-- Column 1 -->
         <div class="col">
           <img src="img/logo.png" alt="Logo" class="logo" />
           <h4>Contact</h4>
@@ -508,7 +579,6 @@
           </p>
           <p><strong>Phone:</strong> 023 023 4445 / 079 234 3243</p>
           <p><strong>Hours:</strong> 10:00 – 18:00, Mon – Sat</p>
-
           <div class="follow">
             <h4>Follow Us</h4>
             <div class="icon">
@@ -519,28 +589,22 @@
             </div>
           </div>
         </div>
-
-        <!-- Column 2 -->
         <div class="col">
           <h4>About</h4>
           <a href="#">About Us</a>
           <a href="#">Delivery Information</a>
           <a href="#">Privacy Policy</a>
-          <a href="#">Terms & Conditions</a>
+          <a href="#">Terms &amp; Conditions</a>
           <a href="#">Contact Us</a>
         </div>
-
-        <!-- Column 3 -->
         <div class="col">
           <h4>My Account</h4>
           <a href="#">Sign In</a>
-          <a href="#">View Cart</a>
+          <a href="cart.html">View Cart</a>
           <a href="#">My Wishlist</a>
           <a href="#">Track My Order</a>
           <a href="#">Help</a>
         </div>
-
-        <!-- Column 4 -->
         <div class="col install">
           <h4>Install App</h4>
           <p>From App Store or Google Play</p>
@@ -552,92 +616,65 @@
           <img src="img/pay/pay.png" alt="Payment Methods" />
         </div>
       </div>
-
       <div class="copyright">
-        <p>© 2025. All rights reserved.</p>
+        <p>&copy; 2025. All rights reserved.</p>
       </div>
     </footer>
-    <!-- <script src="script.js"></script> -->
+
+    <script src="cart.js"></script>
     <script>
-      // Get elements
+      // ── Hamburger menu ──
       const hamburger = document.getElementById("hamburger");
       const navbar = document.getElementById("navbar");
       const navOverlay = document.getElementById("navOverlay");
       const closeBtn = document.getElementById("close");
-      const body = document.body;
 
-      // Function to open menu
       function openMenu() {
         navbar.classList.add("active");
         hamburger.classList.add("active");
         navOverlay.classList.add("active");
-        body.style.overflow = "hidden";
-        console.log("Menu opened"); // For debugging
+        document.body.style.overflow = "hidden";
       }
-
-      // Function to close menu
       function closeMenu() {
         navbar.classList.remove("active");
         hamburger.classList.remove("active");
         navOverlay.classList.remove("active");
-        body.style.overflow = "";
-        console.log("Menu closed"); // For debugging
+        document.body.style.overflow = "";
       }
 
-      // Toggle menu when hamburger is clicked
-      if (hamburger) {
-        hamburger.addEventListener("click", function (e) {
-          e.stopPropagation();
-          console.log("Hamburger clicked"); // For debugging
+      hamburger?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        navbar.classList.contains("active") ? closeMenu() : openMenu();
+      });
+      closeBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        closeMenu();
+      });
+      navOverlay?.addEventListener("click", closeMenu);
+      document
+        .querySelectorAll("#navbar li a:not(#close)")
+        .forEach((l) => l.addEventListener("click", closeMenu));
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeMenu();
+      });
+      navbar?.addEventListener("click", (e) => e.stopPropagation());
 
-          if (navbar.classList.contains("active")) {
-            closeMenu();
-          } else {
-            openMenu();
-          }
-        });
-      }
-
-      // Close menu when close button is clicked
-      if (closeBtn) {
-        closeBtn.addEventListener("click", function (e) {
+      // ── Add to Cart buttons ──
+      document.querySelectorAll(".cart-add-btn").forEach((btn) => {
+        btn.addEventListener("click", function (e) {
           e.preventDefault();
-          console.log("Close button clicked"); // For debugging
-          closeMenu();
-        });
-      }
-
-      // Close menu when overlay is clicked
-      if (navOverlay) {
-        navOverlay.addEventListener("click", function () {
-          console.log("Overlay clicked"); // For debugging
-          closeMenu();
-        });
-      }
-
-      // Close menu when clicking a navigation link
-      const navLinks = document.querySelectorAll("#navbar li a:not(#close)");
-      navLinks.forEach(function (link) {
-        link.addEventListener("click", function () {
-          console.log("Nav link clicked"); // For debugging
-          closeMenu();
+          const icon = this.querySelector("i");
+          Cart.addItem({
+            id: this.dataset.id,
+            name: this.dataset.name,
+            price: parseFloat(this.dataset.price),
+            img: this.dataset.img,
+          });
+          // Visual feedback
+          icon.classList.add("added");
+          setTimeout(() => icon.classList.remove("added"), 1200);
         });
       });
-
-      // Close menu on escape key
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && navbar.classList.contains("active")) {
-          console.log("Escape pressed"); // For debugging
-          closeMenu();
-        }
-      });
-
-      // Prevent clicks inside navbar from closing it
-      if (navbar) {
-        navbar.addEventListener("click", function (e) {
-          e.stopPropagation();
-        });
-      }
     </script>
   </body>
 </html>
